@@ -3,6 +3,19 @@ var fs = require('fs')
 var images_name = fs.readdirSync('./images/')
 var new_images_name = new Array();
 
+images_name.forEach((img)=>{
+    var img_name = img.split('.')
+
+    if(parseInt(img_name[0]) > 9 && img_name[0][0] == '0'){
+        var new_image_name = img_name[0].replaceAll('0','')
+        fs.rename(`./images/${img}`,`./images/${new_image_name}.${img_name[1]}`,(err)=> err ? console.log(err) : null)
+    }
+
+    if(parseInt(img_name[0]) < 10 && img_name[0][0] == '0' && img_name[0][1] == '0'){
+        fs.rename(`./images/${img}`,`./images/0${img_name[0][2]}.${img_name[1]}`,(e)=>e ? console.log(e) : null)
+    }
+})
+
 var has_prefix_number = false;
 
 images_name.forEach((single_image)=>{
