@@ -7,7 +7,12 @@ images_name.forEach((img)=>{
     var img_name = img.split('.')
 
     if(parseInt(img_name[0]) > 9 && img_name[0][0] == '0'){
-        var new_image_name = img_name[0].replaceAll('0','')
+        var new_image_name = img_name[0].replace('0','')
+
+        if(parseInt(img_name[0]) % 5 != 0){
+            new_image_name = img_name[0].replaceAll('0','')
+        }
+
         fs.rename(`./images/${img}`,`./images/${new_image_name}.${img_name[1]}`,(err)=> err ? console.log(err) : null)
     }
 
